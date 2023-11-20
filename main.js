@@ -1,28 +1,26 @@
-let slideIndex = 1;
-showSlides(slideIndex);
-
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
+$(document).ready(function () {
+  $('#search').click(function () {
+  
+      var checker = 0;
+      for (var i = 0; i < 8; i++) {
+          var card = $("div").filter(".col-md-3")[i];
+          var title = $("h5").filter(".card-title")[i].innerText.toUpperCase();
+  
+          if (title.indexOf($("#inp").val().toUpperCase()) > -1) {
+              card.style.display = 'block';
+              checker++;
+          }
+          else {
+              card.style.display = 'none';
+          }
+      }
+      if(checker > 0){
+  
+          $("#not_find_any_thing").text("");
+      }
+      else{
+          $("#not_find_any_thing").text("No Result Found").fadeIn();
+  
+      }
+  });
+  });
